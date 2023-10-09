@@ -3,11 +3,24 @@ pub trait Serializable {
 }
 
 pub struct Animation {
-    statt: Frame,
+    start: Frame,
     changes: Vec<Changes>,
 }
 
-struct Frame {
+impl Animation {
+    pub fn new(start: Frame) -> Self {
+        Self {
+            start,
+            changes: vec![],
+        }
+    }
+
+    pub fn add(&mut self, changes: Changes) {
+        self.changes.push(changes)
+    }
+}
+
+pub struct Frame {
     parts: Vec<Part>,
 }
 
@@ -15,8 +28,14 @@ enum Part {
     SingleColor(Color),
 }
 
-struct Changes {
+pub struct Changes {
     changes: Vec<Change>,
+}
+
+impl Changes {
+    pub fn new() -> Self {
+        Self { changes: vec![] }
+    }
 }
 
 enum Change {
