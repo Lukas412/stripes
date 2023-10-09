@@ -28,8 +28,15 @@ pub struct Frame {
     parts: Vec<Part>,
 }
 
+impl Frame {
+    pub fn new() -> Self {
+        Self { parts: vec![] }
+    }
+}
+
 enum Part {
     SingleColor(Color),
+    Linear { start: Color, end: Color, steps: u8 },
 }
 
 pub struct Changes {
