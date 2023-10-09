@@ -3,5 +3,9 @@
 version = 3
 
 [[package]]
-name = "stripes"
+name = "stripes_cli"
+version = "0.1.0"
+
+[[package]]
+name = "stripes_core"
 version = "0.1.0"
