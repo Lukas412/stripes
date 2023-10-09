@@ -32,6 +32,14 @@ impl Frame {
     pub fn new() -> Self {
         Self { parts: vec![] }
     }
+
+    pub fn add_solid_color(&mut self, value: SolidColor) {
+        self.add(Part::SingleColor(value))
+    }
+
+    fn add(&mut self, part: Part) {
+        self.parts.push(part)
+    }
 }
 
 impl Serializable for Frame {
@@ -39,8 +47,26 @@ impl Serializable for Frame {
 }
 
 enum Part {
-    SingleColor(Color),
+    Solid(SolidColor),
     Linear { start: Color, end: Color, steps: u8 },
+}
+
+pub struct SolidColor {
+    color: Color,
+    length: u8,
+}
+
+impl SolidColor {
+    pub fn new(color: Color, mut length: u8) -> Self {
+        if length == 0 {
+            length = 1;
+        }
+        Self { color, length }
+    }
+
+    pub fn single(color: Color) -> Self {
+        Self { color, length: 1 }
+    }
 }
 
 pub struct Changes {
