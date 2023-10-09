@@ -20,6 +20,10 @@ impl Animation {
     }
 }
 
+impl Serializable for Animation {
+    fn serialize_into(&self, output: &mut String) {}
+}
+
 pub struct Frame {
     parts: Vec<Part>,
 }
