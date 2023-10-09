@@ -34,6 +34,10 @@ impl Frame {
     }
 }
 
+impl Serializable for Frame {
+    fn serialize_into(&self, output: &mut String) {}
+}
+
 enum Part {
     SingleColor(Color),
     Linear { start: Color, end: Color, steps: u8 },
