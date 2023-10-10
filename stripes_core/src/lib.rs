@@ -1,6 +1,4 @@
-pub trait Serializable {
-    fn serialize_into(&self, output: &mut String);
-}
+use std::fmt::{Display, Formatter};
 
 pub struct Animation {
     start: Frame,
@@ -20,8 +18,10 @@ impl Animation {
     }
 }
 
-impl Serializable for Animation {
-    fn serialize_into(&self, output: &mut String) {}
+impl Display for Animation {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "")
+    }
 }
 
 pub struct Frame {
@@ -42,8 +42,10 @@ impl Frame {
     }
 }
 
-impl Serializable for Frame {
-    fn serialize_into(&self, output: &mut String) {}
+impl Display for Frame {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "")
+    }
 }
 
 enum Part {
@@ -83,22 +85,20 @@ enum Change {
     Part(Part),
 }
 
-struct Color {
+pub struct Color {
     red: u8,
     green: u8,
     blue: u8,
 }
 
 impl Color {
-    fn new(red: u8, green: u8, blue: u8) -> Self {
+    pub fn new(red: u8, green: u8, blue: u8) -> Self {
         Self { red, green, blue }
     }
 }
 
-impl Serializable for Color {
-    fn serialize_into(&self, output: &mut String) {
-        output.push(self.red.into());
-        output.push(self.green.into());
-        output.push(self.blue.into());
+impl Display for Color {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:02X}{:02X}{:02X}", self.red, self.green, self.blue)
     }
 }
