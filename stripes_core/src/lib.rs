@@ -34,7 +34,7 @@ impl Frame {
     }
 
     pub fn add_solid_color(&mut self, value: SolidColor) {
-        self.add(Part::SingleColor(value))
+        self.add(Part::Solid(value))
     }
 
     fn add(&mut self, part: Part) {
