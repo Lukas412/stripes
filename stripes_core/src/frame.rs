@@ -1,4 +1,4 @@
-use crate::{Part, SolidColor};
+use crate::Part;
 use std::fmt::{Display, Formatter};
 
 pub struct Frame {
@@ -22,6 +22,13 @@ impl Frame {
 
 impl Display for Frame {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        write!(f, "")
+        let mut parts = self.parts.iter();
+        if let Some(first) = parts.next() {
+            write!(f, "{}", first)?;
+        }
+        for part in parts {
+            write!(f, ",{}", part)?;
+        }
+        Ok(())
     }
 }
