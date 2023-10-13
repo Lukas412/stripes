@@ -18,6 +18,15 @@ impl Changes {
         self.add(change);
         self
     }
+
+    pub fn add_part(&mut self, position: u16, part: impl Into<Part>) {
+        self.add(Change::new_part(position, part))
+    }
+
+    pub fn with_part(mut self, position: u16, part: impl Into<Part>) -> Self {
+        self.add_part(position, part);
+        self
+    }
 }
 
 impl Display for Changes {
@@ -40,10 +49,10 @@ pub struct Change {
 }
 
 impl Change {
-    pub fn new_part(position: u16, part: Part) -> Self {
+    pub fn new_part(position: u16, part: impl Into<Part>) -> Self {
         Self {
             position,
-            content: ChangeContent::Part(part),
+            content: ChangeContent::Part(part.into()),
         }
     }
 }
