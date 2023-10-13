@@ -1,5 +1,13 @@
 use std::fmt::{Display, Formatter};
 
+mod changes;
+mod frame;
+
+pub use {
+    changes::{Change, Changes},
+    frame::Frame,
+};
+
 pub struct Animation {
     start: Frame,
     changes: Vec<Changes>,
@@ -33,31 +41,7 @@ impl Display for Animation {
     }
 }
 
-pub struct Frame {
-    parts: Vec<Part>,
-}
-
-impl Frame {
-    pub fn new() -> Self {
-        Self { parts: vec![] }
-    }
-
-    pub fn add_solid_color(&mut self, value: SolidColor) {
-        self.add(Part::Solid(value))
-    }
-
-    fn add(&mut self, part: Part) {
-        self.parts.push(part)
-    }
-}
-
-impl Display for Frame {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        write!(f, "")
-    }
-}
-
-enum Part {
+pub enum Part {
     Solid(SolidColor),
     Linear(LinearGradient),
 }
@@ -117,45 +101,6 @@ impl LinearGradient {
 impl Display for LinearGradient {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         write!(f, "s{}e{}l{}", self.start, self.end, self.length)
-    }
-}
-
-pub struct Changes {
-    changes: Vec<Change>,
-}
-
-impl Changes {
-    pub fn new() -> Self {
-        Self { changes: vec![] }
-    }
-}
-
-impl Display for Changes {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        write!(f, ";")?;
-        let mut changes = self.changes.iter();
-        if let Some(first) = changes.next() {
-            write!(f, "{}", first)?;
-        }
-        for change in changes {
-            write!(f, ",{}", change)?;
-        }
-        Ok(())
-    }
-}
-
-enum Change {
-    Part(Part),
-}
-
-impl Display for Change {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Change::Part(part) => {
-                write!(f, "{}", part);
-            }
-        }
-        Ok(())
     }
 }
 
