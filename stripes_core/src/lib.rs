@@ -20,7 +20,11 @@ impl Animation {
 
 impl Display for Animation {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        write!(f, "")
+        write!(f, "{}", self.start)?;
+        for changes in self.changes.iter() {
+            write!(f, "{}", changes)?;
+        }
+        Ok(())
     }
 }
 
