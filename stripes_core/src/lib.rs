@@ -58,6 +58,17 @@ enum Part {
     Linear { start: Color, end: Color, steps: u8 },
 }
 
+impl Display for Part {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Part::Solid(color) => {
+                write!(f, "{}", color)
+            }
+            Part::Linear { start, end, steps } => {}
+        }
+    }
+}
+
 pub struct SolidColor {
     color: Color,
     length: u8,
@@ -73,6 +84,12 @@ impl SolidColor {
 
     pub fn single(color: Color) -> Self {
         Self { color, length: 1 }
+    }
+}
+
+impl Display for SolidColor {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "c{}l{}", self.color, self.length)
     }
 }
 
@@ -108,7 +125,7 @@ impl Display for Change {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
             Change::Part(part) => {
-                write!(f, "p{}", part);
+                write!(f, "{}", part);
             }
         }
         Ok(())
