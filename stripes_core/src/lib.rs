@@ -93,6 +93,27 @@ impl Display for SolidColor {
     }
 }
 
+pub struct LinearGradient {
+    start: Color,
+    end: Color,
+    length: u8,
+}
+
+impl LinearGradient {
+    pub fn new(start: Color, end: Color, mut length: u8) -> Self {
+        if length <= 1 {
+            length = 2;
+        }
+        Self { start, end, length }
+    }
+}
+
+impl Display for LinearGradient {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "s{}e{}l{}", self.start, self.end, self.length)
+    }
+}
+
 pub struct Changes {
     changes: Vec<Change>,
 }
