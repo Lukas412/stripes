@@ -10,12 +10,13 @@ impl Frame {
         Self { parts: vec![] }
     }
 
-    pub fn add_solid_color(&mut self, value: SolidColor) {
-        self.add(Part::Solid(value))
+    pub fn add(&mut self, part: impl Into<Part>) {
+        self.parts.push(part.into())
     }
 
-    fn add(&mut self, part: Part) {
-        self.parts.push(part)
+    pub fn with(mut self, part: impl Into<Part>) -> Self {
+        self.add(part);
+        self
     }
 }
 
