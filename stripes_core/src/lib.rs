@@ -1,5 +1,4 @@
 use std::fmt::{Display, Formatter};
-use std::ptr::write;
 
 pub struct Animation {
     start: Frame,
@@ -16,6 +15,11 @@ impl Animation {
 
     pub fn add(&mut self, changes: Changes) {
         self.changes.push(changes)
+    }
+
+    pub fn with(mut self, changes: Changes) -> Self {
+        self.add(changes);
+        self
     }
 }
 
