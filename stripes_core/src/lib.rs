@@ -55,7 +55,7 @@ impl Display for Frame {
 
 enum Part {
     Solid(SolidColor),
-    Linear { start: Color, end: Color, steps: u8 },
+    Linear(LinearGradient),
 }
 
 impl Display for Part {
@@ -64,7 +64,9 @@ impl Display for Part {
             Part::Solid(color) => {
                 write!(f, "{}", color)
             }
-            Part::Linear { start, end, steps } => {}
+            Part::Linear(gradient) => {
+                write!(f, "{}", gradient)
+            }
         }
     }
 }
