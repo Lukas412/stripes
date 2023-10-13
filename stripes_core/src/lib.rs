@@ -89,8 +89,12 @@ impl Changes {
 impl Display for Changes {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         write!(f, ";")?;
-        for change in self.changes {
-            write!(f, "{}", change)?;
+        let mut changes = self.changes.iter();
+        if let Some(first) = changes.next() {
+            write!(f, "{}", first)?;
+        }
+        for change in changes {
+            write!(f, ",{}", change)?;
         }
         Ok(())
     }
@@ -98,6 +102,17 @@ impl Display for Changes {
 
 enum Change {
     Part(Part),
+}
+
+impl Display for Change {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Change::Part(part) => {
+                write!(f, "p{}", part);
+            }
+        }
+        Ok(())
+    }
 }
 
 pub struct Color {
