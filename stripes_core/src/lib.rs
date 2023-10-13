@@ -1,11 +1,13 @@
 use std::fmt::{Display, Formatter};
 
 mod changes;
+mod color;
 mod frame;
 mod part;
 
 pub use {
     changes::{Change, Changes},
+    color::Color,
     frame::Frame,
     part::{LinearGradient, Part, SolidColor},
 };
@@ -40,24 +42,6 @@ impl Display for Animation {
             write!(f, "{}", changes)?;
         }
         Ok(())
-    }
-}
-
-pub struct Color {
-    red: u8,
-    green: u8,
-    blue: u8,
-}
-
-impl Color {
-    pub fn new(red: u8, green: u8, blue: u8) -> Self {
-        Self { red, green, blue }
-    }
-}
-
-impl Display for Color {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{:02X}{:02X}{:02X}", self.red, self.green, self.blue)
     }
 }
 
