@@ -46,4 +46,10 @@ impl Display for Animation {
 }
 
 #[cfg(test)]
-mod tests;
+mod tests {
+    use super::*;
+
+    fn can_display_animation() {
+        let animation = Animation::new(Frame::new().with(SolidColor::new(Color::red())));
+    }
+}

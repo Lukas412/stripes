@@ -43,6 +43,12 @@ impl Display for SolidColor {
     }
 }
 
+impl From<SolidColor> for Part {
+    fn from(value: SolidColor) -> Self {
+        Self::Solid(value)
+    }
+}
+
 pub struct LinearGradient {
     start: Color,
     end: Color,
@@ -61,5 +67,11 @@ impl LinearGradient {
 impl Display for LinearGradient {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         write!(f, "s{}e{}l{}", self.start, self.end, self.length)
+    }
+}
+
+impl From<LinearGradient> for Part {
+    fn from(value: LinearGradient) -> Self {
+        Self::Linear(value)
     }
 }

@@ -10,6 +10,10 @@ impl Color {
     pub fn new(red: u8, green: u8, blue: u8) -> Self {
         Self { red, green, blue }
     }
+
+    pub fn red() -> Self {
+        Self::new(u8::MAX, u8::MIN, u8::MIN)
+    }
 }
 
 impl Display for Color {
