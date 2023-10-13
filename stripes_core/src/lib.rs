@@ -172,3 +172,6 @@ impl Display for Color {
         write!(f, "{:02X}{:02X}{:02X}", self.red, self.green, self.blue)
     }
 }
+
+#[cfg(test)]
+mod tests;
