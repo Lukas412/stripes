@@ -1,4 +1,5 @@
 use std::fmt::{Display, Formatter};
+use std::ptr::write;
 
 pub struct Animation {
     start: Frame,
@@ -82,6 +83,16 @@ pub struct Changes {
 impl Changes {
     pub fn new() -> Self {
         Self { changes: vec![] }
+    }
+}
+
+impl Display for Changes {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, ";")?;
+        for change in self.changes {
+            write!(f, "{}", change)?;
+        }
+        Ok(())
     }
 }
 
